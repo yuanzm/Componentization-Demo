@@ -1,0 +1,22 @@
+{
+  "name": "Componentization-Demo",
+  "version": "0.0.1",
+  "description": "A demo for componentization develop in FE",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-browserify": "*",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-less": "~0.11.0",
+    "coffeeify": "~0.6.0",
+    "stringify": "~2.0.0",
+    "grunt-contrib-connect": "~0.8.0"
+  },
+  "author": "yuanzm",
+  "license": "MIT",
+  "dependencies": {
+    "eventemitter2": "~0.4.13",
+    "lodash": "~2.4.1",
+    "through": "^2.3.7"
+  }
+}

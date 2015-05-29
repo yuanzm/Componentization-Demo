@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript" src="../lib/eventemitter2.js"></script>
+<script type="text/javascript">
+	function eventify(klass) {
+	    if (klass.prototype instanceof EventEmitter2) {
+	        console.warn("Class has been eventified!");
+	        return klass;
+	    }
+
+	    function Tempt() {
+	        klass.apply(this, arguments);
+	        EventEmitter2.call(this);
+	    };
+	    function Tempt2() {};
+
+	    Tempt2.prototype = Object.create(EventEmitter2.prototype)
+	    Tempt2.prototype.constructor = EventEmitter2;
+
+	    var temptProp = Object.create(Tempt2.prototype);
+	    var klassProp = klass.prototype;
+
+	    for (var attr in klassProp) {
+	        temptProp[attr] = klassProp[attr];
+	    }
+
+	    Tempt.prototype = temptProp;
+	    Tempt.prototype.constructor = klass;
+
+	    return Tempt;
+	}
+
+	function Parent() {
+		this.name = 'parent';
+	}
+
+	function Child(parent) {
+		this.name = 'child';
+		this.parent = parent;
+	}
+
+	Parent = eventify(Parent);
+	Child = eventify(Child);
+
+	var parent = new Parent();
+	var child = new Child(parent);
+
+	parent.on('fuck', function() {
+		console.log('you said fuck, hahah~');
+	});
+
+	this.parent.emit('fuck');
+</script>
+</html>
